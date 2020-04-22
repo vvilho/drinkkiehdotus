@@ -10,11 +10,15 @@
 const apiurl = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
 // Etsitään HTML-sivulta tarvittavat komponentit id:n avulla.
 const hakunappi = document.getElementById("hakunappi");
+const suosikki = document.getElementById("suosikki");
 // TODO: etsi html-sivulta komponentti, johon tuloksien pitäisi ilmestyä.
 
 
 // lisätään napille tapahtumankäsittelijä
 hakunappi.addEventListener('click', tee_haku);
+suosikki.addEventListener("click", suosikkiPainallus);
+
+
 
 // Idea: tämä fetch-osa säilyy aina lähes vakiona.
 function tee_haku()  {
@@ -27,6 +31,11 @@ function tee_haku()  {
     });
 
 };
+function suosikkiPainallus(){
+    var DrinkID=suosikki.getAttribute("data-drinkID");
+    console.log(DrinkID);
+}
+
 
 function naytaVastaus(jsonData) {
 
@@ -40,7 +49,8 @@ function naytaVastaus(jsonData) {
     teksti.innerHTML=node;
     var ainesosat = [];
     var maarat = [];
-   
+    var ID = jsonData.drinks[0].idDrink;
+    suosikki.setAttribute("data-drinkID",ID);
     for (var i = 1; i<16; i++){
         var ingNumber = "strIngredient"+i;
         var measureNumber = "strMeasure"+i;
@@ -61,11 +71,7 @@ function naytaVastaus(jsonData) {
             document.getElementById("li2"+i).innerHTML = maarat[i-1];
         
     }
-
-
-
-
-    
+    suosikki.style.visibility = "visible";
 
 }
 
