@@ -34,6 +34,7 @@ function tee_haku()  {
 function suosikkiPainallus(){
     var DrinkID=suosikki.getAttribute("data-drinkID");
     console.log(DrinkID);
+    localStorage.setItem("suosikki", DrinkID);
 }
 
 
