@@ -30,7 +30,8 @@ function tee_haku()  {
 
 function naytaVastaus(jsonData) {
 
-    
+    var otsikko = document.getElementById("otsikko");
+    otsikko.innerHTML = "Ainesosat:";
     var teksti = document.getElementById("chuck");
     var kuva = document.getElementById("kuva");
     var node = jsonData.drinks[0].strDrink;
