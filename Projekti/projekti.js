@@ -104,6 +104,9 @@ function naytaVastaus(jsonData) {
     img.setAttribute('src', jsonData.drinks[0].strDrinkThumb)
     img.setAttribute('class', 'drinkIMG')
     result.appendChild(img)
+    document.getElementById("kartta").setAttribute("class", "visible");
+    document.getElementById("locationtext").setAttribute("class", "visible");
+
 
 
 
