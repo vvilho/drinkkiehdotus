@@ -6,6 +6,7 @@
 	Kun koodi toimii, niin poista turhat open höpinät.
 */
 
+
 // hakuosoitteen vakio-osa.
 const apiurl = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
 // Etsitään HTML-sivulta tarvittavat komponentit id:n avulla.
