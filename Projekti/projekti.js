@@ -30,36 +30,79 @@ function tee_haku()  {
 
 function naytaVastaus(jsonData) {
 
-    
     var teksti = document.getElementById("chuck");
-    var kuva = document.getElementById("kuva");
+    var result = document.querySelector('.result')
     var node = jsonData.drinks[0].strDrink;
-    var kuva1 = jsonData.drinks[0].strDrinkThumb;
-    kuva.setAttribute("src", kuva1 )
     teksti.innerHTML=node;
     var ainesosat = [];
     var maarat = [];
+
+    console.log(jsonData)
    
-    for (var i = 1; i<16; i++){
-        var ingNumber = "strIngredient"+i;
-        var measureNumber = "strMeasure"+i;
+    for (let i = 1; i<16; i++){
+        let ingNumber = "strIngredient"+i;
+        if (jsonData.drinks[0][ingNumber] == null || jsonData.drinks[0][ingNumber] === "")
+        {
+            break;
+        }
         ainesosat.push(jsonData.drinks[0][ingNumber]);
+    }
+
+    for (let i = 1; i<16; i++) {
+        let measureNumber = "strMeasure"+i;
+        if (jsonData.drinks[0][measureNumber] === null || jsonData.drinks[0][measureNumber] === "")
+        {
+            break;
+        }
         maarat.push(jsonData.drinks[0][measureNumber]);
     }
   
     
    
-    var ainesosalista = document.getElementById("ainesosat");
-    var maaraLista = document.getElementById("maarat");
+    var ainesosalista = document.querySelector(".ingredients");
+    var maaraLista = document.querySelector(".amounts");
 
-    for (var i=1;i<16;i++){
-        
-            document.getElementById("li"+i).innerHTML = ainesosat[i-1];
-        
-        
-            document.getElementById("li2"+i).innerHTML = maarat[i-1];
+    if (ainesosalista.firstChild && maaraLista.firstChild)
+    {
+        ainesosalista.innerHTML = "";
+        maaraLista.innerHTML = "";
+        let img = document.querySelector('.drinkIMG')
+        if (img !== null) {
+            result.removeChild(img)
+        }
         
     }
+
+    var ingHeader = document.createElement('h4');
+    ingHeader.innerText = 'Ingredients';
+    
+    var amHeader = document.createElement('h4');
+    amHeader.innerText = 'Amounts';
+
+    ainesosalista.appendChild(ingHeader);
+    maaraLista.appendChild(amHeader);
+
+    var ingrUL = document.createElement('ul');
+    var amountUL = document.createElement('ul');
+
+    ainesosat.map(ainesosa => {
+        let li = document.createElement('li')
+        li.innerText = ainesosa;
+        ingrUL.appendChild(li)
+    });
+
+    maarat.map(maara => {
+        let li = document.createElement('li');
+        li.innerText = maara;
+        amountUL.appendChild(li)
+    })
+
+    ainesosalista.appendChild(ingrUL);
+    maaraLista.appendChild(amountUL);
+    let img = document.createElement('img')
+    img.setAttribute('src', jsonData.drinks[0].strDrinkThumb)
+    img.setAttribute('class', 'drinkIMG')
+    result.appendChild(img)
 
 
 
