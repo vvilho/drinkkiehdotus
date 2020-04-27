@@ -18,3 +18,8 @@ var linkki = lista[valinta];
 
 document.getElementById("kartta").src = linkki;
 
+function getRandom() {
+    valinta = Math.floor(Math.random() * pituus);
+    linkki = lista[valinta];
+    document.getElementById("kartta").src = linkki;
+}

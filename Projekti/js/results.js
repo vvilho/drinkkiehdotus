@@ -1,12 +1,3 @@
-/*
-	Javascript-tiedosto AJAX-tehtäviä varten.
-	Jos etsitään TV-sarjoja haulla "girls", niin TV Maze APIsta suoritettava hakuosoite on:
-	http://api.tvmaze.com/search/shows?q=girls
-	Testaa haun toimintaa omassa selaimessa (Firefox osaa tulkita json-tuloksen yleensä paremmin).
-	Kun koodi toimii, niin poista turhat open höpinät.
-*/
-
-
 // hakuosoitteen vakio-osa.
 const apiurl = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
 // Etsitään HTML-sivulta tarvittavat komponentit id:n avulla.
@@ -104,6 +95,8 @@ function naytaVastaus(jsonData) {
     img.setAttribute('src', jsonData.drinks[0].strDrinkThumb)
     img.setAttribute('class', 'drinkIMG')
     result.appendChild(img)
+
+    getRandom();
     document.getElementById("kartta").setAttribute("class", "visible");
     document.getElementById("locationtext").setAttribute("class", "visible");
 

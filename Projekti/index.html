@@ -2,7 +2,7 @@
 <html lang="en">
 <head>
     <meta charset="UTF-8"/>
-    <link rel="stylesheet" type="text/css" href="styles.css"> 
+    <link rel="stylesheet" type="text/css" href="./styles.css"> 
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
 
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&display=swap" rel="stylesheet">
@@ -11,50 +11,24 @@
 </head>
 
 <body class="wrapper">
-    <nav class="topnav">
-        <h2 class="title">The Dr(u/i)nkMachine</h2>
-        
-    </nav>
-    <div class="maincontent">
+
+
+    <div class="searchWrapper">
+        <section class="titlebanner">
+            <img src="./Logos/DruinkLogo_ver4_white.svg" class="logo">
+            <h1 class="title">The Dr(u/i)nkMachine</h1>
+        </section>
         <section class="search">
-            <h2>Click to get random drink</h2>
-            <button id="hakunappi">get</button>
+                
+                <input type="text">
+                
         </section>
-        <section class="result">
-            <h3 id="chuck"></h3>
-            <div class="row">
-                <div class="column">
-                    <div class="ingredients">
-                        
-
-                    </div>
-                </div>
-                <div class="column">
-                    <div class="amounts">
-                        
-
-                    </div>
-                </div>
-            </div>
-            
-            
-            
-        </section>
-        
-        <p id="locationtext" class="hidden">Suggested place to drink this cocktail</p>
-        <iframe class="hidden" id="kartta" src="" width="600" height="450" frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>   
-        
-
     </div>
-    
+
     <footer class="bottomInfo">
         <p>Made by Nokia 3310 Gang</p>
     </footer>
 
-    <script src="karttascript.js"></script>
-    <script src="projekti.js"></script>
     
-
-
 </body>
 </html>

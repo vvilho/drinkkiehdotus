@@ -6,7 +6,7 @@
 .wrapper {
     margin: 0;
 }
-
+/* Topnav styling */
 .wrapper .topnav {
     top: 0;
     left: 0;
@@ -16,42 +16,116 @@
 
     background-color: #022B3A;
 
-    display: flex;
-    z-index: 500;
+    z-index: 1;
+ }
+
+ .wrapper .topnav .logo {
+     height: 2.19em;
+     width: auto;
+
+     margin-top: 0.7em;
+     margin-left: 0.4em;
+     padding: 0;
+     display: block;
+     float: left;
  }
 
 .wrapper .topnav .title {
     font-family: 'Poppins', sans-serif;
     margin: 0.625em;
+    margin-left: 0.2em;
     float: left;
     display: block;
-    
-
-}
-
-h2.title {
     color: white;
+}
+
+.wrapper .topnav button {
+    padding: 0.4em 0.6em;
+    margin: 0.6em;
+    margin-right: 2em;
+    display: block;
+    float: right;
+
+    background-color: #1f7a8c;
+    font-family: 'Poppins', sans-serif;
+    font-size: 18px;
+    color: white;
+    border-style: none;
+    border-radius: 2px;
+
+    cursor: pointer;
+    transition: 0.3s;
 
 }
 
-.wrapper .maincontent {
+.wrapper .topnav button:hover {
+    background-color: #bfdbf7;
+    color: #022B3A;
+}
+
+
+
+/* Search Styling */
+.wrapper .searchWrapper {
+    width: 75%;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 25%;
+    margin-bottom: 25%;
+
+    border-style: solid;
+    border-radius: 0.4em;
+}
+
+.wrapper .searchWrapper .titlebanner {
+    height: 6em;
+    margin-top: 0;
+    top: 0;
+    background-color: #1f7a8c;
+}
+
+.wrapper .searchWrapper .titlebanner .logo {
+    height: 4.5em;
+    margin-top: 0.75em;
+    margin-bottom: 0.75em;
+    display: block;
+    float: left;
+}
+
+.wrapper .searchWrapper .titlebanner .title {
+    color:white;
+    font-size: 60px;
+}
+
+.wrappper .search {
     margin-top: 4.2em;
     margin-bottom: 1.25em;
-    margin-left: 25%;
-
-    max-width: 50%;
+    width: 50%;
+    
 }
 
 
+/* Content styling */
+.wrapper .contentWrapper {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+}
 
-.wrapper .maincontent .result .column {
+.wrapper .contentWrapper .maincontent {
+    margin-top: 4.2em;
+    margin-bottom: 1.25em;
+}
+
+.wrapper .contentWrapper .maincontent .result .column {
     float: left;
     width: 40%;
     padding: 1em;
 }
 
-.wrapper .maincontent .result .drinkIMG {
-    max-width: 25em;
+.wrapper .contentWrapper .maincontent .result .drinkIMG {
+    margin-top: 1.5em;
+    max-width: 100%;
     height: auto;
     
 }
@@ -74,16 +148,28 @@ h2.title {
 
     display: block;
     text-align: center;
-
 }
 
+/* Footer styling */
 .wrapper .bottomInfo p {
     color: white;
 
 }
+
+/* Map styling */
 .hidden{
     visibility: hidden;
 }
 .seen{
     visibility: visible;
+}
+
+.mapwrapper {
+    margin-top: 4em;
+}
+
+.mapwrapper #kartta {
+    width: 100%;
+    height: 25em; 
+    
 }
