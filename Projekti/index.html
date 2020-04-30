@@ -7,28 +7,35 @@
 
     <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&display=swap" rel="stylesheet">
 
-    <title>Random drink</title>
+    <title>Drink generator</title>
 </head>
 
 <body class="wrapper">
-
-
     <div class="searchWrapper">
         <section class="titlebanner">
-            <img src="./Logos/DruinkLogo_ver4_white.svg" class="logo">
-            <h1 class="title">The Dr(u/i)nkMachine</h1>
+            <div class="titlewrapper">
+                <img src="./Logos/DruinkLogo_ver4_white.svg" class="logo">
+                <h1 class="title">The Dr(u/i)nkMachine</h1>
+            </div>
         </section>
         <section class="search">
+                <h2>Search for drinks</h2>
+                <input type="text" id="haku" placeholder="ingredient"></input>
+                <section class="buttonwrapper">
+                   <button id="runsearch" class="searchButton">Search</button>
+                   <button id="hakunappi" class="randomButton">Random</button>
+                </section>
                 
-                <input type="text">
                 
         </section>
+
     </div>
 
     <footer class="bottomInfo">
         <p>Made by Nokia 3310 Gang</p>
     </footer>
 
-    
+    <script src="js/indexscript.js"></script>
+    <script src="js/indexRandom.js"></script>
 </body>
 </html>

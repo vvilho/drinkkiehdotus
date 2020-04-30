@@ -1,21 +1,37 @@
 // hakuosoitteen vakio-osa.
-const apiurl = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
+const apiurl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 // Etsitään HTML-sivulta tarvittavat komponentit id:n avulla.
 const hakunappi = document.getElementById("hakunappi");
 // TODO: etsi html-sivulta komponentti, johon tuloksien pitäisi ilmestyä.
 
+let hakusana = localStorage.getItem("siirry");
 
 // lisätään napille tapahtumankäsittelijä
-hakunappi.addEventListener('click', tee_haku);
+
 
 // Idea: tämä fetch-osa säilyy aina lähes vakiona.
-function tee_haku()  {
+tee_haku(hakusana);
+
+function painallus(){
+    hakusana = hakukentta.value;
+    tee_haku(hakusana);
+}
+
+function tee_haku(hakusana)  {
     // TODO: haetaan html-sivulta käyttäjän antama hakuteksti (muista .value)
     // TODO: poista siis tuo alla oleva kovakoodaus!
-    fetch(apiurl).then(function(response) {
-        return response.json();
-    }).then(function(json) {
-        naytaVastaus(json);				// siirrytään varsinaisen datan käsittelyyn.
+    fetch(apiurl + hakusana)
+    .then((response) => {
+        if (response.status >= 200 && response.status <= 299) {
+            return response.json();
+        } 
+    })
+    .then((json) => {
+        naytaVastaus(json);	
+    }).catch(error => {
+        console.log(error);
+        console.log("Drink ID ongelma / välimuistissa ei ole drink ID:tä tallennettu");
+        
     });
 
 };
@@ -28,8 +44,9 @@ function naytaVastaus(jsonData) {
     teksti.innerHTML=node;
     var ainesosat = [];
     var maarat = [];
+    
 
-    console.log(jsonData)
+    
    
     for (let i = 1; i<16; i++){
         let ingNumber = "strIngredient"+i;
