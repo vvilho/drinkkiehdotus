@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8"/>
+    <link rel="stylesheet" type="text/css" href="../styles.css"> 
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <link href="https://fonts.googleapis.com/css2?family=Open+Sans&family=Poppins&display=swap" rel="stylesheet">
+
+    <title>Random drink</title>
+</head>
+
+<body class="wrapper">
+    <nav class="topnav">
+        <a href="../index.html">
+            <div>
+                <img src="../Logos/DruinkLogo_ver4_white.svg" class="logo">
+                <h2 class="title">The Dr(u/i)nkMachine</h2>
+            </div>
+        </a>
+
+        <button id="hakunappi">Random?</button>
+    </nav>
+    <div class="contentWrapper">
+        <div class="maincontent">
+
+            <section class="result">
+                <h2 id="chuck"></h2>
+                <div class="row">
+                    <div class="column">
+                        <div class="ingredients">
+                            
+
+                        </div>
+                    </div>
+                    <div class="column">
+                        <div class="amounts">
+                            
+
+                        </div>
+                    </div>
+                </div>
+                
+                
+                
+            </section>
+            
+            <div class="mapwrapper">
+                <p id="locationtext" class="hidden">Suggested place to drink this cocktail</p>
+                <iframe class="hidden" id="kartta" src=""frameborder="0" style="border:0;" allowfullscreen="" aria-hidden="false" tabindex="0"></iframe>   
+            </div>
+            
+
+        </div>
+    </div>
+    
+    <footer class="bottomInfo">
+        <p>Made by Nokia 3310 Gang</p>
+    </footer>
+
+    <script src="../js/karttascript.js"></script>
+    <script src="../js/results.js"></script>
+    <script src="../js/random.js"></script>
+
+    
+
+
+</body>
+</html>
