@@ -9,7 +9,7 @@ const input = document.getElementById("haku");
 const toFavouritesButton = document.querySelector("#favourites");
 
 function toFavourites() {
-    window.location.href = "./pages/favourites.html";
+    window.location.href = "./Pages/favourites.html";
 }
 
 
