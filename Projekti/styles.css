@@ -179,6 +179,8 @@ html, body {
 .wrapper .contentWrapper .maincontent {
     margin-top: 4.2em;
     margin-bottom: 1.25em;
+   
+
 }
 
 .wrapper .contentWrapper .maincontent #favouriteList {
@@ -197,6 +199,10 @@ html, body {
     height: auto;
 }
 
+.wrapper .contentWrapper .maincontent .result {
+    max-width: 700px;
+    align-items: center;
+}
 .wrapper .contentWrapper .maincontent .result .resultWrapper {
     display: flex;
     flex-direction: row;
@@ -208,6 +214,14 @@ html, body {
 
 .wrapper .contentWrapper .maincontent .result .resultWrapper h2 {
     display: block;
+}
+.wrapper .contentWrapper .maincontent .result p {
+    display: block;
+    max-width: 700px;
+    margin-top: 1em;
+    padding: 1em;
+    border: #1f7a8c;
+    border-style: solid;
 }
 
 .wrapper .contentWrapper .maincontent .result .resultWrapper #favouriteButton{

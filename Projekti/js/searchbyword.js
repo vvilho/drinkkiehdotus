@@ -5,16 +5,16 @@ let searchWord = localStorage.getItem("search");
 // hakuosoitteen vakio-osa
 const apiurl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=";
 // Etsitään HTML-sivulta tarvittavat komponentit id:n avulla.
-const hakunappi = document.getElementById("runsearch");
+const searchButton = document.getElementById("runsearch");
 
-const hakukentta = document.getElementById("haku");
+const searchField = document.getElementById("haku");
 // TODO: etsi html-sivulta komponentti, johon tuloksien pitäisi ilmestyä.
 const section = document.getElementById("result");
 
 const toFavouritesButton = document.querySelector("#favourites");
 
 // lisätään napille tapahtumankäsittelijä
-hakunappi.addEventListener('click', painallus);
+searchButton.addEventListener('click', painallus);
 
 
 searchByWord(searchWord);
@@ -27,7 +27,7 @@ toFavouritesButton.addEventListener('click', toFavourites);
 
 
 function painallus(){
-    searchWord = hakukentta.value;
+    searchWord = searchField.value;
     searchByWord(searchWord);
 }
 
@@ -66,7 +66,8 @@ function searchByWord(searchWord)  {
 
 
 function showResults(jsonData) {
-    
+    let favouriteList = JSON.parse(localStorage.getItem("favourites"));
+
     var maara = document.createElement("h5");
     var maara1 = document.createTextNode("Search: '"+searchWord+"' resulted "+jsonData.drinks.length+" drinks");
     maara.appendChild(maara1);
@@ -96,7 +97,20 @@ function showResults(jsonData) {
             };
 
         linkelement.appendChild(image);
-
+        
+       try {
+        if(favouriteList.indexOf(jsonData.drinks[i].idDrink) > -1){
+            name = document.createTextNode((i+1) + ". " + jsonData.drinks[i].strDrink+" (favourite)");
+            console.log("on suosikki");
+            
+        }
+           
+       } catch (error) {
+           
+       }
+        
+            
+        
 
         h2.appendChild(name);
         div.appendChild(h2);

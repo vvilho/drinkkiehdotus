@@ -23,17 +23,18 @@ function addFavourite() {
     console.log(`Adding to the array ${drinkID}`)
     favouriteList.push(drinkID);
     localStorage.setItem("favourites", JSON.stringify(favouriteList));
+
+    document.getElementById("favouriteButton").setAttribute("style", "background-color: red;");
+    document.getElementById("favouriteButton").innerHTML = "me likey!";
 }
 
 favouriteButton.addEventListener("click", addFavourite)
 
-// Idea: tämä fetch-osa säilyy aina lähes vakiona.
 findDrink(drinkID);
 
 
 function findDrink(drinkID)  {
-    // TODO: haetaan html-sivulta käyttäjän antama hakuteksti (muista .value)
-    // TODO: poista siis tuo alla oleva kovakoodaus!
+    
     fetch(apiurl + drinkID)
     .then((response) => {
         if (response.status >= 200 && response.status <= 299) {
@@ -58,6 +59,19 @@ function showResults(jsonData) {
     teksti.innerHTML=node;
     var ainesosat = [];
     var maarat = [];
+    let favouriteList = JSON.parse(localStorage.getItem("favourites"));
+    
+    try {
+        if(favouriteList.indexOf(drinkID) > -1){
+            document.getElementById("favouriteButton").setAttribute("style", "background-color: red;");
+            document.getElementById("favouriteButton").innerHTML = "me likey!";
+    
+            console.log("on suosikki");
+        }
+        
+    } catch (error) {
+        
+    }
     
 
     
@@ -108,6 +122,9 @@ function showResults(jsonData) {
     var ingrUL = document.createElement('ul');
     var amountUL = document.createElement('ul');
 
+    var howto = document.createElement('p');
+    howto.innerText = jsonData.drinks[0].strInstructions;
+
     ainesosat.map(ainesosa => {
         let li = document.createElement('li')
         li.innerText = ainesosa;
@@ -125,6 +142,7 @@ function showResults(jsonData) {
     let img = document.createElement('img')
     img.setAttribute('src', jsonData.drinks[0].strDrinkThumb)
     img.setAttribute('class', 'drinkIMG')
+    result.appendChild(howto);
     result.appendChild(img)
 
     getRandom();
