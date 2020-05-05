@@ -25,7 +25,7 @@ function tee_haku_random()  {
 function naytaVastaus_random(jsonData) {
     
     console.log(jsonData.drinks[0].idDrink);
-    localStorage.setItem("siirry", jsonData.drinks[0].idDrink);
+    localStorage.setItem("drinkID", jsonData.drinks[0].idDrink);
     window.location.href = './results.html';
 
 
