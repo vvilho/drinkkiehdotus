@@ -1,5 +1,5 @@
 
-let hakusana = localStorage.getItem("hakusana");
+let searchWord = localStorage.getItem("search");
 
 
 // hakuosoitteen vakio-osa
@@ -11,21 +11,27 @@ const hakukentta = document.getElementById("haku");
 // TODO: etsi html-sivulta komponentti, johon tuloksien pitäisi ilmestyä.
 const section = document.getElementById("result");
 
+const toFavouritesButton = document.querySelector("#favourites");
+
 // lisätään napille tapahtumankäsittelijä
 hakunappi.addEventListener('click', painallus);
 
 
-tee_haku(hakusana);
+searchByWord(searchWord);
 
+function toFavourites() {
+    window.location.href = "./favourites.html";
+}
 
+toFavouritesButton.addEventListener('click', toFavourites);
 
 
 function painallus(){
-    hakusana = hakukentta.value;
-    tee_haku(hakusana);
+    searchWord = hakukentta.value;
+    searchByWord(searchWord);
 }
 
-function tee_haku(hakusana)  {
+function searchByWord(searchWord)  {
     section.textContent = '';
     
     
@@ -34,14 +40,14 @@ function tee_haku(hakusana)  {
  
    
     
-    fetch(apiurl + hakusana)
+    fetch(apiurl + searchWord)
     .then((response) => {
         if (response.status >= 200 && response.status <= 299) {
             return response.json();
         } 
     })
     .then((json) => {
-        naytaVastaus(json);	
+        showResults(json);	
     }).catch(error => {
         console.log(error);
         
@@ -59,10 +65,10 @@ function tee_haku(hakusana)  {
 };
 
 
-function naytaVastaus(jsonData) {
+function showResults(jsonData) {
     
     var maara = document.createElement("h5");
-    var maara1 = document.createTextNode("Search: '"+hakusana+"' resulted "+jsonData.drinks.length+" drinks");
+    var maara1 = document.createTextNode("Search: '"+searchWord+"' resulted "+jsonData.drinks.length+" drinks");
     maara.appendChild(maara1);
     section.appendChild(maara);
 
@@ -85,8 +91,8 @@ function naytaVastaus(jsonData) {
         image.setAttribute("id", "thumbnail");
         image.setAttribute("data_ID", jsonData.drinks[i].idDrink);
         image.onclick = function() {
-            localStorage.setItem("siirry", this.getAttribute("data_ID"));
-            console.log("Drinkin ID on: "+localStorage.getItem("siirry")+". Siirrytään ainesosasivulle");
+            localStorage.setItem("drinkID", this.getAttribute("data_ID"));
+            console.log("Drinkin ID on: "+localStorage.getItem("drinkID")+". Siirrytään ainesosasivulle");
             };
 
         linkelement.appendChild(image);
@@ -98,9 +104,6 @@ function naytaVastaus(jsonData) {
         section.appendChild(div);
 
    }
-   
-
-
 }
 
 

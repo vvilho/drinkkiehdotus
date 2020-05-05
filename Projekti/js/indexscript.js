@@ -1,14 +1,53 @@
-const nappi = document.getElementById("runsearch");
+const apiurl2 = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
+
+// Etsitään HTML-sivulta tarvittavat komponentit id:n avulla.
+const randomButton = document.querySelector("#randomButton");
+
+const searchButton = document.getElementById("runsearch");
 const input = document.getElementById("haku");
 
+const toFavouritesButton = document.querySelector("#favourites");
+
+function toFavourites() {
+    window.location.href = "./pages/favourites.html";
+}
 
 
-nappi.addEventListener('click', hakusanan_lahetys);
+searchButton.addEventListener('click', searchByWord);
 
-function hakusanan_lahetys(){
-    let hakusana = input.value;
-    localStorage.setItem("hakusana", hakusana);
+function searchByWord(){
+    let searchWord = input.value;
+    localStorage.setItem("search", searchWord);
     window.location.href = './Pages/search.html';
     
 
 }
+
+function searchRandom()  {
+
+    fetch(apiurl2).then(function(response) {
+        return response.json();
+    }).then(function(json) {
+        showRandom(json);				
+    });
+}
+
+
+function showRandom(jsonData) {
+    
+    console.log(jsonData.drinks[0].idDrink);
+    localStorage.setItem("drinkID", jsonData.drinks[0].idDrink);
+    window.location.href = './Pages/results.html';
+
+
+}
+
+
+toFavouritesButton.addEventListener('click', toFavourites);
+
+// lisätään napille tapahtumankäsittelijä
+randomButton.addEventListener('click', searchRandom);
+
+
+
+

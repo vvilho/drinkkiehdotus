@@ -164,7 +164,10 @@ html, body {
     transition: 0.3s;
 }
 
-
+.wrapper .searchWrapper .search .buttonwrapper button:hover {
+    background-color: #bfdbf7;
+    color: #022B3A;
+}
 
 /* Content styling */
 .wrapper .contentWrapper {
@@ -176,6 +179,39 @@ html, body {
 .wrapper .contentWrapper .maincontent {
     margin-top: 4.2em;
     margin-bottom: 1.25em;
+}
+
+.wrapper .contentWrapper .maincontent #favouriteList {
+    list-style: none;
+}
+
+.wrapper .contentWrapper .maincontent .drinkObject {
+    width: 50%;
+    cursor: pointer;
+    margin-top: 2em;
+}
+
+.wrapper .contentWrapper .maincontent #favouriteList img {
+    margin-left: 0;
+    width: 100%;
+    height: auto;
+}
+
+.wrapper .contentWrapper .maincontent .result .resultWrapper {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+    clear: both;
+    max-width: 700px;
+    align-items: center;
+}
+
+.wrapper .contentWrapper .maincontent .result .resultWrapper h2 {
+    display: block;
+}
+
+.wrapper .contentWrapper .maincontent .result .resultWrapper #favouriteButton{
+    display: block;
 }
 
 .wrapper .contentWrapper .maincontent .result .column {
@@ -191,12 +227,11 @@ html, body {
     
 }
 
-.wrapper .contentWrapper .maincontent .searchButton {
+.fancyButton {
     padding: 0.3625em 0.325em;
     margin: 0.6em;
     margin-left: 1vw;
-    width: 5em;
-    height: 2em;
+ 
     display: inline-block;
 
     background-color: #1f7a8c;
@@ -208,6 +243,11 @@ html, body {
 
     cursor: pointer;
     transition: 0.3s;
+}
+
+.fancyButton:hover {
+    background-color: #bfdbf7;
+    color: #022B3A;
 }
 
 #thumbnail {
@@ -264,6 +304,7 @@ html, body {
 
 .mapwrapper #kartta {
     width: 100%;
+    max-width: 700px;
     height: 25em; 
     
 }

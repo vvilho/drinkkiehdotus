@@ -1,33 +1,47 @@
 // hakuosoitteen vakio-osa.
 const apiurl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
-// Etsitään HTML-sivulta tarvittavat komponentit id:n avulla.
-const hakunappi = document.getElementById("hakunappi");
+
 // TODO: etsi html-sivulta komponentti, johon tuloksien pitäisi ilmestyä.
+const favouriteButton = document.querySelector("#favouriteButton");
+const toFavouritesButton = document.querySelector("#favourites");
 
-let hakusana = localStorage.getItem("siirry");
+let drinkID = localStorage.getItem("drinkID");
 
-// lisätään napille tapahtumankäsittelijä
-
-
-// Idea: tämä fetch-osa säilyy aina lähes vakiona.
-tee_haku(hakusana);
-
-function painallus(){
-    hakusana = hakukentta.value;
-    tee_haku(hakusana);
+function toFavourites() {
+    window.location.href = "./favourites.html";
 }
 
-function tee_haku(hakusana)  {
+toFavouritesButton.addEventListener('click', toFavourites);
+
+function addFavourite() {
+    let favouriteList = JSON.parse(localStorage.getItem("favourites"));
+    if (favouriteList === null)
+    {
+        console.log('Creating new array')
+        favouriteList = [];
+    }
+    console.log(`Adding to the array ${drinkID}`)
+    favouriteList.push(drinkID);
+    localStorage.setItem("favourites", JSON.stringify(favouriteList));
+}
+
+favouriteButton.addEventListener("click", addFavourite)
+
+// Idea: tämä fetch-osa säilyy aina lähes vakiona.
+findDrink(drinkID);
+
+
+function findDrink(drinkID)  {
     // TODO: haetaan html-sivulta käyttäjän antama hakuteksti (muista .value)
     // TODO: poista siis tuo alla oleva kovakoodaus!
-    fetch(apiurl + hakusana)
+    fetch(apiurl + drinkID)
     .then((response) => {
         if (response.status >= 200 && response.status <= 299) {
             return response.json();
         } 
     })
     .then((json) => {
-        naytaVastaus(json);	
+        showResults(json);	
     }).catch(error => {
         console.log(error);
         console.log("Drink ID ongelma / välimuistissa ei ole drink ID:tä tallennettu");
@@ -36,7 +50,7 @@ function tee_haku(hakusana)  {
 
 };
 
-function naytaVastaus(jsonData) {
+function showResults(jsonData) {
 
     var teksti = document.getElementById("chuck");
     var result = document.querySelector('.result')
@@ -116,13 +130,6 @@ function naytaVastaus(jsonData) {
     getRandom();
     document.getElementById("kartta").setAttribute("class", "visible");
     document.getElementById("locationtext").setAttribute("class", "visible");
-
-
-
-
-
-    
-
 }
 
 
