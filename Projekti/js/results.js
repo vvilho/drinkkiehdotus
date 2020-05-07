@@ -2,6 +2,8 @@
 const apiurl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 
 
+
+
 // Search components from HTML-document 
 const favouriteButton = document.querySelector("#favouriteButton");
 const toFavouritesButton = document.querySelector("#favourites");

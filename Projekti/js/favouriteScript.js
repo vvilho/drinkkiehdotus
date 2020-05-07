@@ -1,6 +1,10 @@
 const clearButton = document.getElementById("clearButton");
 const ul = document.getElementById("favouriteList");
+
 var favouriteList = JSON.parse(localStorage.getItem("favourites"));
+    
+
+
 favouriteList = favouriteList.sort();
 
 var title = document.getElementById("title");
