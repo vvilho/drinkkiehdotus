@@ -1,23 +1,24 @@
-
+// Find the searchword from the cookies
 let searchWord = localStorage.getItem("search");
 
 
-// hakuosoitteen vakio-osa
+// Constant of the API URL
 const apiurl = "https://www.thecocktaildb.com/api/json/v1/1/filter.php?i=";
-// Etsitään HTML-sivulta tarvittavat komponentit id:n avulla.
+
+// Find needed components of the web page
 const searchButton = document.getElementById("runsearch");
 
-const searchField = document.getElementById("haku");
+const searchField = document.getElementById("searchField");
 // TODO: etsi html-sivulta komponentti, johon tuloksien pitäisi ilmestyä.
 const section = document.getElementById("result");
 
 const toFavouritesButton = document.querySelector("#favourites");
 
-// lisätään napille tapahtumankäsittelijä
-searchButton.addEventListener('click', painallus);
+// Add event listener to the button
+searchButton.addEventListener('click', searchForDrink);
 
 
-searchByWord(searchWord);
+searchByIngredient(searchWord);
 
 function toFavourites() {
     window.location.href = "./favourites.html";
@@ -25,20 +26,15 @@ function toFavourites() {
 
 toFavouritesButton.addEventListener('click', toFavourites);
 
-
-function painallus(){
+// search wor drinkg
+function searchForDrink(){
     searchWord = searchField.value;
-    searchByWord(searchWord);
+    searchByIngredient(searchWord);
 }
 
-function searchByWord(searchWord)  {
+// Search for a drink by ingredient
+function searchByIngredient(searchWord)  {
     section.textContent = '';
-    
-    
-    // TODO: haetaan html-sivulta käyttäjän antama hakuteksti (muista .value)
-    // TODO: poista siis tuo alla oleva kovakoodaus!
- 
-   
     
     fetch(apiurl + searchWord)
     .then((response) => {
@@ -56,11 +52,6 @@ function searchByWord(searchWord)  {
         p.appendChild(pNode);
         section.appendChild(p);
     });
-    
-  
-    
-
-    
 
 };
 
@@ -68,10 +59,9 @@ function searchByWord(searchWord)  {
 function showResults(jsonData) {
     let favouriteList = JSON.parse(localStorage.getItem("favourites"));
 
-    var maara = document.createElement("h5");
-    var maara1 = document.createTextNode("Search: '"+searchWord+"' resulted "+jsonData.drinks.length+" drinks");
-    maara.appendChild(maara1);
-    section.appendChild(maara);
+    var foundInfo = document.createElement("h5");
+    foundInfo.innerText = "Search: '"+searchWord+"' resulted "+jsonData.drinks.length+" drinks";
+    section.appendChild(foundInfo);
 
     
 
@@ -93,15 +83,14 @@ function showResults(jsonData) {
         image.setAttribute("data_ID", jsonData.drinks[i].idDrink);
         image.onclick = function() {
             localStorage.setItem("drinkID", this.getAttribute("data_ID"));
-            console.log("Drinkin ID on: "+localStorage.getItem("drinkID")+". Siirrytään ainesosasivulle");
             };
 
         linkelement.appendChild(image);
         
        try {
+        // Check if drink is a favourite
         if(favouriteList.indexOf(jsonData.drinks[i].idDrink) > -1){
             name = document.createTextNode((i+1) + ". " + jsonData.drinks[i].strDrink+" (favourite)");
-            console.log("on suosikki");
             
         }
            

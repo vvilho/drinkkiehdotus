@@ -1,38 +1,53 @@
-// hakuosoitteen vakio-osa.
+// Url of the cocktailDB API
 const apiurl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 
-// TODO: etsi html-sivulta komponentti, johon tuloksien pitäisi ilmestyä.
 const favouriteButton = document.querySelector("#favouriteButton");
 const toFavouritesButton = document.querySelector("#favourites");
 
 let drinkID = localStorage.getItem("drinkID");
 
+// Change to favourites site
 function toFavourites() {
     window.location.href = "./favourites.html";
 }
 
 toFavouritesButton.addEventListener('click', toFavourites);
 
+// Add a drink to favourites list
 function addFavourite() {
     let favouriteList = JSON.parse(localStorage.getItem("favourites"));
     if (favouriteList === null)
     {
-        console.log('Creating new array')
         favouriteList = [];
     }
-    console.log(`Adding to the array ${drinkID}`)
+
     favouriteList.push(drinkID);
     localStorage.setItem("favourites", JSON.stringify(favouriteList));
 
-    document.getElementById("favouriteButton").setAttribute("style", "background-color: red;");
-    document.getElementById("favouriteButton").innerHTML = "me likey!";
+    favouriteButton.setAttribute("style", "background-color: red;");
+    favouriteButton.innerText = "me likey!";
+    favouriteButton.removeEventListener('click', addFavourite);
+    favouriteButton.addEventListener('click', removeFavourite);
+}
+
+// Remove a drink from the favourites
+function removeFavourite() {
+    let favouriteList = JSON.parse(localStorage.getItem("favourites"));
+
+    favouriteList = favouriteList.filter(favouriteID => favouriteID !== drinkID);
+    localStorage.setItem("favourites", JSON.stringify(favouriteList));
+
+    favouriteButton.removeAttribute("style");
+    favouriteButton.innerText = "Favourite?"
+    favouriteButton.removeEventListener('click', removeFavourite)
+    favouriteButton.addEventListener('click', addFavourite)
 }
 
 favouriteButton.addEventListener("click", addFavourite)
 
 findDrink(drinkID);
 
-
+// Search a drink by it's id from cocktailDB
 function findDrink(drinkID)  {
     
     fetch(apiurl + drinkID)
@@ -51,22 +66,25 @@ function findDrink(drinkID)  {
 
 };
 
+// Render the results of the search
 function showResults(jsonData) {
 
     var teksti = document.getElementById("chuck");
     var result = document.querySelector('.result')
     var node = jsonData.drinks[0].strDrink;
     teksti.innerHTML=node;
-    var ainesosat = [];
-    var maarat = [];
+    var ingredients = [];
+    var amounts = [];
     let favouriteList = JSON.parse(localStorage.getItem("favourites"));
     
+    // If a drink has been already favourited, change the button to remove 
     try {
         if(favouriteList.indexOf(drinkID) > -1){
-            document.getElementById("favouriteButton").setAttribute("style", "background-color: red;");
-            document.getElementById("favouriteButton").innerHTML = "me likey!";
+            favouriteButton.setAttribute("style", "background-color: red;");
+            favouriteButton.innerText = "me likey!";
+            favouriteButton.removeEventListener('click', addFavourite);
+            favouriteButton.addEventListener('click', removeFavourite);
     
-            console.log("on suosikki");
         }
         
     } catch (error) {
@@ -82,7 +100,7 @@ function showResults(jsonData) {
         {
             break;
         }
-        ainesosat.push(jsonData.drinks[0][ingNumber]);
+        ingredients.push(jsonData.drinks[0][ingNumber]);
     }
 
     for (let i = 1; i<16; i++) {
@@ -91,18 +109,18 @@ function showResults(jsonData) {
         {
             break;
         }
-        maarat.push(jsonData.drinks[0][measureNumber]);
+        amounts.push(jsonData.drinks[0][measureNumber]);
     }
   
     
    
-    var ainesosalista = document.querySelector(".ingredients");
-    var maaraLista = document.querySelector(".amounts");
+    var ingredientList = document.querySelector(".ingredients");
+    var amountList = document.querySelector(".amounts");
 
-    if (ainesosalista.firstChild && maaraLista.firstChild)
+    if (ingredientList.firstChild && amountList.firstChild)
     {
-        ainesosalista.innerHTML = "";
-        maaraLista.innerHTML = "";
+        ingredientList.innerHTML = "";
+        amountList.innerHTML = "";
         let img = document.querySelector('.drinkIMG')
         if (img !== null) {
             result.removeChild(img)
@@ -116,8 +134,8 @@ function showResults(jsonData) {
     var amHeader = document.createElement('h4');
     amHeader.innerText = 'Amounts';
 
-    ainesosalista.appendChild(ingHeader);
-    maaraLista.appendChild(amHeader);
+    ingredientList.appendChild(ingHeader);
+    amountList.appendChild(amHeader);
 
     var ingrUL = document.createElement('ul');
     var amountUL = document.createElement('ul');
@@ -125,20 +143,20 @@ function showResults(jsonData) {
     var howto = document.createElement('p');
     howto.innerText = jsonData.drinks[0].strInstructions;
 
-    ainesosat.map(ainesosa => {
+    ingredients.map(ingredient => {
         let li = document.createElement('li')
-        li.innerText = ainesosa;
+        li.innerText = ingredient;
         ingrUL.appendChild(li)
     });
 
-    maarat.map(maara => {
+    amounts.map(amount => {
         let li = document.createElement('li');
-        li.innerText = maara;
+        li.innerText = amount;
         amountUL.appendChild(li)
     })
 
-    ainesosalista.appendChild(ingrUL);
-    maaraLista.appendChild(amountUL);
+    ingredientList.appendChild(ingrUL);
+    amountList.appendChild(amountUL);
     let img = document.createElement('img')
     img.setAttribute('src', jsonData.drinks[0].strDrinkThumb)
     img.setAttribute('class', 'drinkIMG')
@@ -146,7 +164,7 @@ function showResults(jsonData) {
     result.appendChild(img)
 
     getRandom();
-    document.getElementById("kartta").setAttribute("class", "visible");
+    document.getElementById("map").setAttribute("class", "visible");
     document.getElementById("locationtext").setAttribute("class", "visible");
 }
 

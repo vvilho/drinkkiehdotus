@@ -4,14 +4,13 @@ const apiurl2 = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
 const randomButton = document.querySelector("#randomButton");
 
 const searchButton = document.getElementById("runsearch");
-const input = document.getElementById("haku");
+const input = document.getElementById("searchField");
 
 const toFavouritesButton = document.querySelector("#favourites");
 
 function toFavourites() {
     window.location.href = "./Pages/favourites.html";
 }
-
 
 searchButton.addEventListener('click', searchByWord);
 
@@ -35,7 +34,6 @@ function searchRandom()  {
 
 function showRandom(jsonData) {
     
-    console.log(jsonData.drinks[0].idDrink);
     localStorage.setItem("drinkID", jsonData.drinks[0].idDrink);
     window.location.href = './Pages/results.html';
 

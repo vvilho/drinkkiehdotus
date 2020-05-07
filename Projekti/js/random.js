@@ -1,30 +1,29 @@
 const apiurl2 = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
 // Etsitään HTML-sivulta tarvittavat komponentit id:n avulla.
-const randomButton = document.getElementById("hakunappi");
+const randomButton = document.getElementById("randomButton");
 
 
 
 // lisätään napille tapahtumankäsittelijä
-randomButton.addEventListener('click', tee_haku_random);
+randomButton.addEventListener('click', randomSearch);
 
 
 
 
 
 
-function tee_haku_random()  {
+function randomSearch()  {
 
     fetch(apiurl2).then(function(response) {
         return response.json();
     }).then(function(json) {
-        naytaVastaus_random(json);				
+        showRandom(json);				
     });
 }
 
 
-function naytaVastaus_random(jsonData) {
+function showRandom(jsonData) {
     
-    console.log(jsonData.drinks[0].idDrink);
     localStorage.setItem("drinkID", jsonData.drinks[0].idDrink);
     window.location.href = './results.html';
 

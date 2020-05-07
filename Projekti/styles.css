@@ -120,9 +120,8 @@ html, body {
     float: left;
 }
 
-.wrappper .searchWrapper .search {
-    margin-top: 4.2em;
-    margin-bottom: 1.25em;
+.search {
+    margin-left: 21.5%;
     
 }
 
@@ -130,22 +129,53 @@ html, body {
     margin-left: 1vw;
 }
 
-.wrapper .searchWrapper .search input {
+.wrapper .searchWrapper .search .inputWrapper {
+    display: flex;
+    align-items: center;
+}
+
+.wrapper .searchWrapper .search  input {
     clear: both;
     display: block;
     margin: 1vw;
     font-size: 24px;
+    font-family: 'Poppins', sans-serif;
 
-    width: 50%;
+    color: #1f7a8c;
+    border-color: #1f7a8c;
+    border-width: 0.1em;
+    border-radius: 2px;
+    width: 20vw;
     height: 2em;
 
 }
 
-.wrapper .searchWrapper .search .buttonwrapper {
-    width: 50%;
+.wrapper .searchWrapper .search .inputWrapper #runsearch {
+    padding: 0.2em 0.2em;
+    display: inline-block;
+    font-family: 'Poppins', sans-serif;
+    color: #1f7a8c;
+    background-color: white;
+
+    border-style: solid;
+    border-radius: 2px;
+    border-width: 0.1em;
+    border-color: #1f7a8c;
+    
+    margin-left: 0.5vw;
+    transition: 0.3s;
 }
 
-.wrapper .searchWrapper .search .buttonwrapper button {
+.wrapper .searchWrapper .search .inputWrapper #runsearch:hover {
+    background-color: #1f7a8c;
+    color: white;
+}
+
+.wrapper .searchWrapper .search .buttonwrapper {
+    width: 100%;
+}
+
+.wrapper .searchWrapper .search button {
     padding: 0.4em 0.6em;
     margin: 0.6em;
     margin-left: 1vw;
@@ -199,29 +229,31 @@ html, body {
     height: auto;
 }
 
-.wrapper .contentWrapper .maincontent .result {
-    max-width: 700px;
+section.result {
+    max-width: 73%;
     align-items: center;
 }
-.wrapper .contentWrapper .maincontent .result .resultWrapper {
+.wrapper .contentWrapper .maincontent .result .titleWrapper {
     display: flex;
     flex-direction: row;
     justify-content: space-between;
     clear: both;
-    max-width: 700px;
+    max-width: 100%;
     align-items: center;
 }
 
-.wrapper .contentWrapper .maincontent .result .resultWrapper h2 {
+.wrapper .contentWrapper .maincontent .result .titleWrapper h2 {
     display: block;
 }
 .wrapper .contentWrapper .maincontent .result p {
     display: block;
-    max-width: 700px;
+    max-width: 100%;
     margin-top: 1em;
     padding: 1em;
     border: #1f7a8c;
     border-style: solid;
+    border-radius: 2px;
+    border-width: 2px;
 }
 
 .wrapper .contentWrapper .maincontent .result .resultWrapper #favouriteButton{
@@ -314,11 +346,11 @@ html, body {
 
 .mapwrapper {
     margin-top: 4em;
+    max-width: 73%;
 }
 
-.mapwrapper #kartta {
+.mapwrapper #map {
     width: 100%;
-    max-width: 700px;
     height: 25em; 
     
 }
