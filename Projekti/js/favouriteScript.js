@@ -2,12 +2,16 @@ const clearButton = document.getElementById("clearButton");
 const ul = document.getElementById("favouriteList");
 
 var favouriteList = JSON.parse(localStorage.getItem("favourites"));
+if (favouriteList === null)
+{
+    favouriteList = [];
+} else 
+{
+    favouriteList = favouriteList.sort();
     
-
-
-favouriteList = favouriteList.sort();
-
-var title = document.getElementById("title");
+    // Removes non-unique entries from array
+    favouriteList = favouriteList.filter(onlyUnique);
+};
 
 title.innerHTML = "Favourites";
 
