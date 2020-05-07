@@ -3,6 +3,10 @@ const ul = document.getElementById("favouriteList");
 var favouriteList = JSON.parse(localStorage.getItem("favourites"));
 favouriteList = favouriteList.sort();
 
+var title = document.getElementById("title");
+
+title.innerHTML = "Favourites";
+
 // Removes non-unique entries from array
 favouriteList = favouriteList.filter(onlyUnique);
 
@@ -19,15 +23,20 @@ for(var i = 0; i < favouriteList.length; i++){
     })
 }
 
+// if there is no favourites, show text
+var emptyList = document.createElement("p");
+emptyList.innerText = "No favourites yet";
+if(favouriteList.length == 0){
+    ul.innerHTML = "<br>";
+    ul.appendChild(emptyList);
+}
 
 function onlyUnique(value, index, self) {
     return self.indexOf(value) === index;
 }
 
 function showResults(jsonData) {
-    var title = document.getElementById("title");
-
-    title.innerHTML = "Favourites";
+    
 
     var name = jsonData.drinks[0].strDrink;
     
@@ -46,6 +55,9 @@ function showResults(jsonData) {
     li.appendChild(img);
 
     ul.appendChild(li);
+    
+
+    
 }
 
 // Show specific drink
@@ -55,7 +67,7 @@ function getDrink(drinkID) {
 }
 
 // Clear the list of favourite drinks
-function clearList(jsonData) {
+function clearList() {
     if(confirm("Are you sure? Press OK to clear favourites.")){
         favouriteList = [];
         localStorage.setItem("favourites", JSON.stringify(favouriteList));

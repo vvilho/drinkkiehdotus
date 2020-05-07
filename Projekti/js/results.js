@@ -1,6 +1,8 @@
 // Url of the cocktailDB API
 const apiurl = "https://www.thecocktaildb.com/api/json/v1/1/lookup.php?i=";
 
+
+// Search components from HTML-document 
 const favouriteButton = document.querySelector("#favouriteButton");
 const toFavouritesButton = document.querySelector("#favourites");
 
@@ -25,7 +27,7 @@ function addFavourite() {
     localStorage.setItem("favourites", JSON.stringify(favouriteList));
 
     favouriteButton.setAttribute("style", "background-color: red;");
-    favouriteButton.innerText = "me likey!";
+    favouriteButton.innerText = "Favourite!";
     favouriteButton.removeEventListener('click', addFavourite);
     favouriteButton.addEventListener('click', removeFavourite);
 }
@@ -81,7 +83,7 @@ function showResults(jsonData) {
     try {
         if(favouriteList.indexOf(drinkID) > -1){
             favouriteButton.setAttribute("style", "background-color: red;");
-            favouriteButton.innerText = "me likey!";
+            favouriteButton.innerText = "Favourite!";
             favouriteButton.removeEventListener('click', addFavourite);
             favouriteButton.addEventListener('click', removeFavourite);
     

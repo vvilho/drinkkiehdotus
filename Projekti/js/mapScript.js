@@ -1,3 +1,5 @@
+// List of beaches at Helsinki area
+
 var maplist = [
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d1840.5114349703615!2d25.150330418509405!3d60.19905930081654!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x46920f0776894ea7%3A0x9cf4601dee670d52!2sAurinkolahden%20uimaranta!5e0!3m2!1sfi!2sfi!4v1587726433738!5m2!1sfi!2sfi",
     "https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d126866.78463489145!2d24.95483819999999!3d60.208974100000006!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x22ca0e6f88e5a7eb!2sKallahdenniemen%20uimaranta!5e0!3m2!1sfi!2sfi!4v1587726831738!5m2!1sfi!2sfi",
@@ -18,6 +20,7 @@ var link = maplist[choice];
 
 document.getElementById("map").src = link;
 
+// Function to choose random location from the list
 function getRandom() {
     choice = Math.floor(Math.random() * length);
     link = maplist[choice];

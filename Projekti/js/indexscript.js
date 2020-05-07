@@ -1,6 +1,8 @@
+// Url of the cocktailDB API
 const apiurl2 = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
 
-// Etsitään HTML-sivulta tarvittavat komponentit id:n avulla.
+
+// Search components from HTML-document by their id
 const randomButton = document.querySelector("#randomButton");
 
 const searchButton = document.getElementById("runsearch");
@@ -12,8 +14,9 @@ function toFavourites() {
     window.location.href = "./Pages/favourites.html";
 }
 
-searchButton.addEventListener('click', searchByWord);
 
+
+// Stores users searc hword to local storage and continues to search.html site
 function searchByWord(){
     let searchWord = input.value;
     localStorage.setItem("search", searchWord);
@@ -21,7 +24,7 @@ function searchByWord(){
     
 
 }
-
+// Uses this APIs random generator to select random drink
 function searchRandom()  {
 
     fetch(apiurl2).then(function(response) {
@@ -31,7 +34,7 @@ function searchRandom()  {
     });
 }
 
-
+// Stores random drinks drinkId to local storage and continues to results.html site
 function showRandom(jsonData) {
     
     localStorage.setItem("drinkID", jsonData.drinks[0].idDrink);
@@ -40,11 +43,21 @@ function showRandom(jsonData) {
 
 }
 
-
+// Event listeners for buttons
 toFavouritesButton.addEventListener('click', toFavourites);
 
-// lisätään napille tapahtumankäsittelijä
 randomButton.addEventListener('click', searchRandom);
+
+searchButton.addEventListener('click', searchByWord);
+
+
+// By pressing enter search is started
+window.addEventListener('keypress', function (e) {
+    if (e.key === 'Enter') {
+      searchByWord();
+      console.log("enter");
+    }
+});
 
 
 

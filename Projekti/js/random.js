@@ -1,10 +1,10 @@
 const apiurl2 = "https://www.thecocktaildb.com/api/json/v1/1/random.php";
-// Etsitään HTML-sivulta tarvittavat komponentit id:n avulla.
+// Search components from HTML-document by their id
 const randomButton = document.getElementById("randomButton");
 
 
 
-// lisätään napille tapahtumankäsittelijä
+// Event listeners for button
 randomButton.addEventListener('click', randomSearch);
 
 

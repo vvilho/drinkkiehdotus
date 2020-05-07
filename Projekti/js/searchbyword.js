@@ -26,7 +26,7 @@ function toFavourites() {
 
 toFavouritesButton.addEventListener('click', toFavourites);
 
-// search wor drinkg
+// search for drink
 function searchForDrink(){
     searchWord = searchField.value;
     searchByIngredient(searchWord);
